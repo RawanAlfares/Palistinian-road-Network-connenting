@@ -382,7 +382,6 @@ void kruskalsAlgorithm() {
         int v=edge[i].dest;
 
         if (findParent(parent,u)!=findParent(parent,v)) {
-            printf("Edge: %s - %s, weight: %.1f\n", cities[u]->name, cities[v]->name, edge[i].weight);
             totalCost+=edge[i].weight;
             unionSet(u,v,parent,rank);
             edgeInMST++;
@@ -429,29 +428,25 @@ int main(void) {
             case 1:loadCities();
                 break;
             case 2: {
-                clock_t t;
-                t = clock();
+                clock_t startTime = clock();
                 primsAlgorithm();
-                t = clock() - t;
-                double time_taken = ((double)t)/CLOCKS_PER_SEC;
-                PTime=time_taken;
+                clock_t endTime = clock();
+                double time_taken = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+                KTime=time_taken;
                 printf("prims function took %.6f seocnds\n", time_taken);
                 break;
             }
             case 3: {
-                clock_t time;
-                time = clock();
-                kruskalsAlgorithm();
-                 time = clock() - time;
-                 double time_taken = ((double)time)/CLOCKS_PER_SEC;
-                 KTime=time_taken;
+                clock_t startTime = clock();
+                 kruskalsAlgorithm();
+                clock_t endTime = clock();
+                double time_taken = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+                KTime=time_taken;
                 printf("kruskals function took %.6f seocnds\n", time_taken);
                 break;
             }
-            case 4: compareTheTwoAlgorithms();{
-
+            case 4: compareTheTwoAlgorithms();
                 break;
-            }
             case 5:exitProgramm();
                  break;
             default: printf("You have entered an invalid choice\n");
